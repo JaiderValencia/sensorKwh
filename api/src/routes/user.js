@@ -7,4 +7,6 @@ const validation = require('../middlewares/validations')
 
 Router.post('/', validation.userValidator, controller.register)
 
+Router.post('/login', controller.login)
+
 module.exports = Router

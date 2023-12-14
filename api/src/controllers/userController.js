@@ -29,6 +29,40 @@ const controller = {
             },
             userData
         })
+    },
+    login: async (req, res) => {
+        const { userData } = req.body
+
+        const userOnDB = await db.User.findOne({
+            where: { email: userData.email }
+        })
+
+        if (!userOnDB || !bcrypt.compare(userData.password, userOnDB.password)) {
+            return res.status(404).json({
+                meta: {
+                    statusCode: 404,
+                    message: 'Los datos ingresados no coinciden'
+                },
+                oldData: {
+                    email: userData.email
+                }
+            })
+        }
+
+        req.session.userLogged = {
+            full_name: userOnDB.full_name,
+            email: userOnDB.email
+        }
+
+        res.status(200).json({
+            meta: {
+                statusCode: 200,
+                message: 'Usuario logueado'
+            },
+            sessionData: {
+                ...req.session.userLogged
+            }
+        })
     }
 }
 

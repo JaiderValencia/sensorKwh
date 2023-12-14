@@ -5,6 +5,16 @@ const api = express()
 api.use(express.urlencoded({ extended: false }));
 api.use(express.json());
 
+const cors = require('cors')
+api.use(cors())
+
+const session = require('express-session')
+api.use(session({
+    secret: process.env.EXPRESS_SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+}))
+
 const routes = require('./routes')
 api.use(routes)
 
