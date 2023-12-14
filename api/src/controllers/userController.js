@@ -7,7 +7,7 @@ const controller = {
         const errors = validationResult(req)
 
         if (!errors.isEmpty()) {
-            return res.send('Esto es una prueba para los errores')
+            return res.send(errors.mapped())
         }
 
         const { userData } = req.body
@@ -19,7 +19,7 @@ const controller = {
         res.status(200).json({
             meta: {
                 statusCode: 200,
-                message: 'user created'
+                message: 'usuario creado'
             },
             userData
         })

@@ -3,6 +3,8 @@ const Router = express.Router()
 
 const controller = require('../controllers/userController')
 
-Router.post('/', controller.register)
+const validation = require('../middlewares/validations')
+
+Router.post('/', validation.userValidator, controller.register)
 
 module.exports = Router
