@@ -49,7 +49,7 @@ const controller = {
             where: { email }
         })
 
-        if (!userOnDB || !bcrypt.compare(password, userOnDB.password)) {
+        if (!userOnDB || !bcrypt.compareSync(password, userOnDB.password)) {
             return res.status(404).json({
                 meta: {
                     statusCode: 404,
