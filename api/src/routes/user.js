@@ -5,8 +5,8 @@ const controller = require('../controllers/userController')
 
 const validation = require('../middlewares/validations')
 
-Router.post('/', validation.userValidator, controller.register)
+Router.post('/', validation.registerValidator, controller.register)
 
-Router.post('/login', controller.login)
+Router.post('/login', validation.loginValidator, controller.login)
 
 module.exports = Router

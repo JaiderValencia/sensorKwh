@@ -2,18 +2,18 @@ const { body } = require('express-validator')
 const db = require('../database/models')
 
 module.exports = {
-    userValidator: [
+    registerValidator: [
         body('userData')
             .notEmpty().withMessage('Debes llenar de información el formulario')
             .custom(async (value) => {
                 if (!value.full_name) {
                     throw new Error('Debes poner tu nombre completo')
-                }                
+                }
 
                 if (!value.email) {
                     throw new Error('Debes poner tu email')
                 }
-                
+
                 if (!value.password) {
                     throw new Error('Debes poner tu contraseña')
                 }
@@ -44,5 +44,11 @@ module.exports = {
 
                 return true
             })
+    ],
+    loginValidator: [
+        body('email')
+            .notEmpty().withMessage('El campo del correo no puede estar vacío').bail(),
+        body('password')
+            .notEmpty().withMessage('El campo de la contraseña no puede estar vacío')
     ]
 }

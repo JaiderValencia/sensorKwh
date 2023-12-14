@@ -31,20 +31,32 @@ const controller = {
         })
     },
     login: async (req, res) => {
-        const { userData } = req.body
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({
+                meta: {
+                    statusCode: 422,
+                    message: 'Hay errores en el formulario'
+                },
+                errors: errors.mapped()
+            })
+        }
+
+        const { email, password } = req.body
 
         const userOnDB = await db.User.findOne({
-            where: { email: userData.email }
+            where: { email }
         })
 
-        if (!userOnDB || !bcrypt.compare(userData.password, userOnDB.password)) {
+        if (!userOnDB || !bcrypt.compare(password, userOnDB.password)) {
             return res.status(404).json({
                 meta: {
                     statusCode: 404,
                     message: 'Los datos ingresados no coinciden'
                 },
                 oldData: {
-                    email: userData.email
+                    email
                 }
             })
         }
