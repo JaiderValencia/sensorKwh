@@ -16,11 +16,13 @@ const controller = {
             })
         }
 
-        const { userData } = req.body
+        const { full_name, email, password, phone } = req.body
 
-        userData.password = bcrypt.hashSync(userData.password, 10)
+        password = bcrypt.hashSync(password, 10)
 
-        await db.User.create(req.body.userData)
+        await db.User.create({
+            full_name, email, password, phone
+        })
 
         res.status(200).json({
             meta: {
