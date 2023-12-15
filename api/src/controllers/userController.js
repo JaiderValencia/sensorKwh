@@ -29,7 +29,7 @@ const controller = {
                 statusCode: 200,
                 message: 'Usuario creado'
             },
-            userData
+            userData: req.body
         })
     },
     login: async (req, res) => {
