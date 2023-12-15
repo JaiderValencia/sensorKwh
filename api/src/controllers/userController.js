@@ -16,7 +16,7 @@ const controller = {
             })
         }
 
-        const { full_name, email, password, phone } = req.body
+        let { full_name, email, password, phone } = req.body
 
         password = bcrypt.hashSync(password, 10)
 
