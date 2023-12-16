@@ -68,6 +68,8 @@ const controller = {
             email: userOnDB.email
         }
 
+        req.session.save()
+
         res.status(200).json({
             meta: {
                 statusCode: 200,
