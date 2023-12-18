@@ -79,6 +79,28 @@ const controller = {
                 ...req.session.userLogged
             }
         })
+    },
+    checkLogin: async (req, res) => {
+        const { email, full_name } = req.body        
+
+        const findPerson = await db.User.findOne({
+            where: {
+                email,
+                full_name
+            }
+        })
+
+        if (!findPerson) {
+            return res.status(404).json({
+                statusCode: 404,
+                message: 'Los datos no coinciden'
+            })
+        }
+
+        res.status(200).json({
+            statusCode: 200,
+            message: 'Los datos coinciden'
+        })
     }
 }
 

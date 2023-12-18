@@ -9,4 +9,6 @@ Router.post('/', validation.registerValidator, controller.register)
 
 Router.post('/login', validation.loginValidator, controller.login)
 
+Router.post('/check', controller.checkLogin)
+
 module.exports = Router
