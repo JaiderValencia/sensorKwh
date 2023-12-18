@@ -6,8 +6,8 @@ module.exports = {
         body('phone')
             .notEmpty().withMessage('Debes poner tu telefono').bail()
             .custom(value => {
-                if (value <= 0) {
-                    throw new Error('Debes poner un número de telefono válido en tu pais')
+                if (phoneValue < 1 || !phoneValue.trim() || !phoneValue.match(/^[0-9]+$/)) {
+                    throw new Error('Pon un número de telefono válido')
                 }
 
                 return true
