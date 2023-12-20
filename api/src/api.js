@@ -6,7 +6,9 @@ api.use(express.urlencoded({ extended: false }));
 api.use(express.json());
 
 const cors = require('cors')
-api.use(cors())
+api.use(cors({
+    origin: 'https://teamroboticsdelpacificoiot.com'
+}))
 
 const session = require('express-session')
 api.use(session({

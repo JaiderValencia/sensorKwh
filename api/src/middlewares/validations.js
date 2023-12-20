@@ -30,6 +30,10 @@ module.exports = {
         body('email')
             .notEmpty().withMessage('Debes poner tu email').bail()
             .custom(async (value) => {
+                if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    throw new Error('No es un correo con formato válido')
+                }
+
                 const searchByEmail = await db.User.findOne({
                     where: { email: value }
                 })
@@ -43,8 +47,23 @@ module.exports = {
     ],
     loginValidator: [
         body('email')
-            .notEmpty().withMessage('El campo del correo no puede estar vacío').bail(),
+            .notEmpty().withMessage('El campo del correo no puede estar vacío').bail()
+            .custom(value => {
+                if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    throw new Error('No es un correo con formato válido')
+                }
+            }),
         body('password')
             .notEmpty().withMessage('El campo de la contraseña no puede estar vacío')
+    ],
+    checkLoginValidator: [
+        body('email').
+            custom(value => {
+                if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    throw new Error('No es un correo válido')
+                }
+            }).bail(),
+        body('name')
+            .notEmpty().withMessage('No puede estar vacío').bail(),
     ]
 }

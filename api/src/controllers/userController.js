@@ -81,7 +81,16 @@ const controller = {
         })
     },
     checkLogin: async (req, res) => {
-        const { email, full_name } = req.body        
+        const errors = validationResult(req)        
+
+        if (!errors.isEmpty()) {
+            return res.status(404).json({
+                statusCode: 404,
+                message: 'Los datos no coinciden'
+            })
+        }
+
+        const { email, full_name } = req.body
 
         const findPerson = await db.User.findOne({
             where: {
