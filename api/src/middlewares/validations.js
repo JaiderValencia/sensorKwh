@@ -52,6 +52,8 @@ module.exports = {
                 if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
                     throw new Error('No es un correo con formato válido')
                 }
+                
+                return true
             }),
         body('password')
             .notEmpty().withMessage('El campo de la contraseña no puede estar vacío')
