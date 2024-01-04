@@ -64,6 +64,8 @@ module.exports = {
                 if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
                     throw new Error('No es un correo válido')
                 }
+
+                return true
             }).bail(),
         body('name')
             .notEmpty().withMessage('No puede estar vacío').bail(),
