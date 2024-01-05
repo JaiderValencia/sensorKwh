@@ -67,7 +67,7 @@ module.exports = {
 
                 return true
             }).bail(),
-        body('name')
+        body('full_name')
             .notEmpty().withMessage('No puede estar vacío').bail(),
     ]
 }
