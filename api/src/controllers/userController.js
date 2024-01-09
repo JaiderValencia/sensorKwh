@@ -28,8 +28,7 @@ const controller = {
             meta: {
                 statusCode: 200,
                 message: 'Usuario creado'
-            },
-            userData: req.body
+            }            
         })
     },
     login: async (req, res) => {

@@ -5,7 +5,7 @@ const controller = require('../controllers/userController')
 
 const validation = require('../middlewares/validations')
 
-Router.post('/', validation.registerValidator, controller.register)
+Router.post('/register', validation.registerValidator, controller.register)
 
 Router.post('/login', validation.loginValidator, controller.login)
 
