@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/api.js",
   "scripts": {
+    "start":"node src/api.js",
     "dev": "nodemon src/api.js",
     "recreatedb:all": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "recreatedb:tables": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate",
