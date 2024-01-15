@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - name: Install npm modules
+      action: npm install
+      path: /home/repositories/sensorKwh
+    - name: Start Node.js app
+      action: node src/api.js
+      path: /home/repositories/sensorKwh
